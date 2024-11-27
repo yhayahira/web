@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yh note</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none; color: inherit;">
+            <h1>木と鉄と油について</h1>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="manga.html">画</a></li>
+                <li><a href="note.html">文</a></li>
+                <li><a href="profile.html">人</a></li>
+            </ul>
+        </nav>
+        <h1>文</h1>
+    </header>
+
+    <main id="diary-container">
+        <!-- 日記データはここに生成されます -->
+    </main>
+
+    <footer>
+        <p>© yamamoto hayahira All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 日記を入力する
+        const diaryData = [
+            {
+                date: "20241122",
+                content: `
+今日は一日中仕事が忙しく、昼食を取る暇もなかったが、
+夜に家でゆっくりと食事を取ることができた。
+↑チャットGPTが自動生成してくれた。全然仕事もないし昼ご飯はたっぷりとった。
+`
+            },
+            {
+                date: "20241126",
+                content: `
+ホームページを作っている。
+今のところhtmlとcssはチャットGPTに手伝ってもらって、うまいこと動いているけれど、ネットに公開するためのGitHubにアップしたときにだけ、画像が表示されない不具合があるので、そこを解決できれば文句なし。
+なぜ今ホームページを、しかもhtmlを書き込むスタイルで作っているのかというと、言わずもがな全部Xの野郎のせいです。
+全部は嘘、半分くらい。あとの半分は自分のせいです。
+Twitterはたぶん2018年くらいから使っていて、当時はROM専でイラストやツイッター漫画とかを見ていた。それ以外のSNSやネット掲示板やらも知らなかったので、ネットの世界といえばTwitterだった。その時見ていた絵はいいものもたくさんあったし、今考えると必要のないものもたくさんあった。とにかく初めてのネットの世界だったので、なんでも見ていた。イラスト・漫画界隈や、ジブリ界隈（ジブラーというファンネームがある！）とかを見ていて、SNSの使い方をなんとなく理解していった。今思うと、これら界隈はネット初心者にはある意味でかなりベストだったのではないだろうか。
+2020年くらいから自分でも絵を投稿し始めて（今のアカウントとは別名義のもの）それなりに楽しくやっていた。このころが一番精力的に、わかりやすくネット活動というものをしていた。ここでしか知りえなかったであろう、作家や漫画やアニメや思想に出会えたことはかなり感謝している。なにせ18歳くらいから20前半までを共に過ごしたので、人格形成にまで影響しているだろう。今の自分が気に入っているわけではなく、むしろ嫌い寄りだけれど、一応。
+そうしていると、まんまと自分でも引くぐらい依存気味になった。今でも完全に抜けたとは言い切れないけれど、前はかなりひどくて、どこかで距離を取らなければとずっと思っていた。
+そんなことを考えつつアカウントを転々しつつSNS断ちを目標としてしていたとき、Twitterの雲行きが怪しくなっていった。
+2023年くらいから今のアカウントを使っているけれど、いまでは自分の中でTwitterはあまり信用しないほうがいい、できることならやめるべきというスタンスで使っている。
+そのための布石としてホームページをつくっているのだけれど、ただホームページをつくりたいなら既存のサービスを使えばいい話である。
+けれどここが半分の自分のせいというもので、私は組織というものを、その内容の良し悪しにかかわらず、ひどく嫌悪する節がある。組織とは学校や会社、界隈や日常生活の仲良しグループも含めて「人が群れとして存在している状態」にものすごく苦手意識がある。
+子供の頃は必ずどこにいても何かの群れに入れられ守ってもらわなければいけなかったが、もう成人も過ぎ、それなりに一人でやっていけるようになると、この苦手意識が一気に成長した。なのでそれ以降、悪い意味では人に頼ろうとしなくなった、一人でできる範囲でしか行動しなくなった、いい意味では一人でできそうなことは全部一人でやってみたいとDIY精神が強くなり、そのための勉強は楽しめるようになった。
+ただそれがひどくなり、今はサービスという何らかの組織が提供するものでさえ、使わないで済むなら使いたくないと思うようになった。Twitterの件もあり、自分の全く知らない上の人間によって、理不尽に環境が悪くなっていくなら、最初から誰かの背中に乗っからずに自力で一から環境をつくりたいという感じに。
+そんなこんなで、今htmlからホームページを作っている。
+もう少しすることがあるし、GitHubの問題も解決していないので、たぶん公開はまだ先になりそう。もしかしたらこの文章も誰にも読まれず、ホームページごと削除することになるかもしれないけれど。
+
+`
+            },
+
+            {
+                date: "20241124",
+                content: `
+乙嫁語りいい。
+なんかみんなまっすぐな言葉しか話してなくて。
+冬の話に入ると服とか装飾の書き込みがえげつなくなる。
+雪で背景の書き込みがなくなるからその分がね。
+`
+            },
+            {
+                date: "20241123",
+                content: `
+コミティアが終わってから何をすればいいかよくわからないので（やることはある）
+古市で乙嫁語りの続きを十巻まで買ったりほかにもいろいろ買って読んだ。
+`
+            }
+        ];
+
+        // 日記セクションを生成する関数
+        function generateDiarySections() {
+            const diaryContainer = document.getElementById("diary-container");
+
+            // 日記データを日付順に並べる（新しい順）
+            const sortedDiary = diaryData.sort((a, b) => b.date - a.date);
+
+            // 各日記をHTML要素として生成
+            sortedDiary.forEach(entry => {
+                const section = document.createElement("section");
+
+                // 日記タイトル
+                const h2 = document.createElement("p");
+                const link = document.createElement("a");
+                link.href = "javascript:void(0);";
+                link.textContent = formatDate(entry.date);
+                link.onclick = () => showDiary(entry.date);
+                h2.appendChild(link);
+
+                // 日記内容（非表示にする）
+                const div = document.createElement("div");
+                div.id = `diary-${entry.date}`;
+                div.className = "diary-content";
+                div.style.display = "none";
+
+                const p = document.createElement("p");
+                p.innerHTML = entry.content.trim().replace(/\n/g, "<br>"); // 改行を反映
+                div.appendChild(p);
+
+                // セクションに追加
+                section.appendChild(h2);
+                section.appendChild(div);
+                diaryContainer.appendChild(section);
+            });
+        }
+
+        // 日付を人間向けにフォーマットする関数
+        function formatDate(dateString) {
+            const year = dateString.slice(0, 4);
+            const month = dateString.slice(4, 6);
+            const day = dateString.slice(6, 8);
+            return `${year}年${month}月${day}日`;
+        }
+
+        // 日記を表示する関数
+        function showDiary(date) {
+            const allDiaryContents = document.querySelectorAll('.diary-content');
+            allDiaryContents.forEach(content => (content.style.display = 'none')); // 他を非表示
+
+            const diaryContent = document.getElementById(`diary-${date}`);
+            if (diaryContent) {
+                diaryContent.style.display = 'block';
+            }
+        }
+
+        // ページ読み込み時に日記を生成
+        window.onload = generateDiarySections;
+    </script>
+</body>
+</html>

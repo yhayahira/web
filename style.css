@@ -1,0 +1,147 @@
+/* 基本スタイル */
+:root {
+    --font-main: "ヒラギノ明朝 Pro", "Yu Mincho", serif;
+    --h1-size: 1.0em; /* h1のサイズを簡単に変更 */
+    --h2-size: 1.0em; /* h2のサイズを簡単に変更 */
+}
+
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* ヘッダー */
+header {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.site-title {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 10px 0;
+    font-size: var(--h1-size);
+}
+
+/* ナビゲーション */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+/* メインコンテンツ */
+main {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.manga h3 {
+    cursor: pointer;
+    color: #4CAF50;
+}
+
+.manga h3:hover {
+    text-decoration: underline;
+}
+
+/* ポップアップのスタイル */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* 半透明の背景 */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: row; /* 画像とボタンを横並び */
+}
+
+.popup img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    display: block;
+    object-fit: contain; /* アスペクト比を保持しながら画像を拡大 */
+}
+
+/* ナビゲーションボタン */
+.navigation-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.prev-button {
+    right: 10%; /* 画像の左隣に配置 */
+}
+
+.next-button {
+    left: 10%; /* 画像の右隣に配置 */
+}
+
+.navigation-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 閉じるボタン */
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* フッター */
+footer {
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+}
