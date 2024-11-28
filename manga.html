@@ -9,7 +9,7 @@
 <body>
     <header>
         <a href="index.html" class="site-title">
-            <h1>木と鉄と油について</h1>
+            <h1>green record</h1>
         </a>
         <nav>
             <ul>
@@ -29,7 +29,7 @@
             </div>
             <div class="manga" data-manga-id="a">
                 <h3>「魔術師の犬」</h3>
-                <p>「緑とナイフと王国たち」収録　2024年</p>
+                <p>「緑とナイフと王国たち」収録　関西コミティア69にて発表、販売　2024年</p>
             </div>
             <div class="manga" data-manga-id="i">
                 <h3>「地獄の口、楽園の門。」</h3>
@@ -48,9 +48,9 @@
 
     <!-- ポップアップ表示のコンテナ -->
     <div class="popup" id="popup">
-        <button class="navigation-button next-button" id="nextButton">◀</button>
-        <img src="" alt="表示画像" id="popupImage">
         <button class="navigation-button prev-button" id="prevButton">▶</button>
+        <img src="" alt="表示画像" id="popupImage">
+        <button class="navigation-button next-button" id="nextButton">◀</button>
         <button class="close-popup" id="closePopup">×</button>
     </div>
 
@@ -114,30 +114,23 @@
         function showPopup(src) {
             popupImage.src = src;
             popup.style.display = 'flex';
-
-            // ボタンの表示を更新
             updateNavigationButtons();
         }
 
         function updateNavigationButtons() {
             if (currentIndex === 0) {
-                prevButton.style.display = 'none';  // 最初のページでは前へボタン非表示
+                prevButton.style.display = 'none';
             } else {
-                prevButton.style.display = 'flex';  // 最初以外では表示
+                prevButton.style.display = 'flex';
             }
-
-            if (currentIndex === currentImages.length - 1) {
-                nextButton.style.display = 'none';  // 最後のページでは次へボタン非表示
-            } else {
-                nextButton.style.display = 'flex';  // 最後以外では表示
-            }
+            nextButton.style.display = 'flex'; // 常に表示
         }
 
         prevButton.addEventListener('click', () => {
             if (currentIndex > 0) {
                 currentIndex--;
                 popupImage.src = currentImages[currentIndex];
-                updateNavigationButtons();  // ボタンの表示を更新
+                updateNavigationButtons();
             }
         });
 
@@ -145,15 +138,16 @@
             if (currentIndex < currentImages.length - 1) {
                 currentIndex++;
                 popupImage.src = currentImages[currentIndex];
-                updateNavigationButtons();  // ボタンの表示を更新
+            } else {
+                popup.style.display = 'none'; // 最後の画像でポップアップを閉じる
             }
+            updateNavigationButtons();
         });
 
         closePopup.addEventListener('click', () => {
             popup.style.display = 'none';
         });
 
-        // スワイプ操作
         let startX = 0;
         let endX = 0;
 
@@ -163,10 +157,10 @@
 
         popup.addEventListener('touchend', (event) => {
             endX = event.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-                nextButton.click(); // 左スワイプ
-            } else if (endX - startX > 50) {
-                prevButton.click(); // 右スワイプ
+            if (endX - startX > 50) {
+                nextButton.click(); // 右スワイプ
+            } else if (startX - endX > 50) {
+                prevButton.click(); // 左スワイプ
             }
         });
     </script>

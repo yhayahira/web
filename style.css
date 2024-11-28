@@ -52,6 +52,16 @@ nav ul li a {
     display: inline-block;
 }
 
+/* リンクスタイル (指定されたリンクの調整) */
+a.no-style {
+    color: black; /* 黒い文字 */
+    text-decoration: none; /* 下線を消す */
+}
+
+a.no-style:hover {
+    color: black; /* ホバー時も黒を維持 */
+}
+
 /* メインコンテンツ */
 main {
     margin: 20px auto;
@@ -144,4 +154,14 @@ footer {
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.8em;
+    text-align: center; /* 中央揃え */
+    white-space: nowrap; /* テキストを1行で表示 */
+}
+
+/* メディアクエリで調整 */
+@media screen and (max-width: 600px) {
+    footer {
+        font-size: 0.7em; /* 画面が狭い場合、フォントサイズを小さくする */
+        padding: 5px; /* パディングを小さく調整 */
+    }
 }
