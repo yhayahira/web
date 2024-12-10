@@ -30,81 +30,72 @@
     </footer>
 
     <script>
-        // 日記を入力する
-        const diaryData = [
-            {
-                content: `
+    // 日記を入力する
+    const diaryData = [
+        {
+            title: "忙しい一日",
+            content: `
 今日は一日中仕事が忙しく、昼食を取る暇もなかったが、
 夜に家でゆっくりと食事を取ることができた。
 ↑チャットGPTが自動生成してくれた。全然仕事もないし昼ご飯はたっぷりとった。
 `
-            },
-            {
-                date: "20241123",
-                content: `
+        },
+        {
+            title: "コミティアの後",
+            content: `
 コミティアが終わってから何をすればいいかよくわからないので（やることはある）
 古市で乙嫁語りの続きを十巻まで買ったりほかにもいろいろ買って読んだ。
 `
-            }
-        ];
-
-        // 日記セクションを生成する関数
-        function generateDiarySections() {
-            const diaryContainer = document.getElementById("diary-container");
-
-            // 日記データを日付順に並べる（新しい順）
-            const sortedDiary = diaryData.sort((a, b) => b.date - a.date);
-
-            // 各日記をHTML要素として生成
-            sortedDiary.forEach(entry => {
-                const section = document.createElement("section");
-
-                // 日記タイトル
-                const h2 = document.createElement("p");
-                const link = document.createElement("a");
-                link.href = "javascript:void(0);";
-                link.textContent = formatDate(entry.date);
-                link.onclick = () => showDiary(entry.date);
-                h2.appendChild(link);
-
-                // 日記内容（非表示にする）
-                const div = document.createElement("div");
-                div.id = `diary-${entry.date}`;
-                div.className = "diary-content";
-                div.style.display = "none";
-
-                const p = document.createElement("p");
-                p.innerHTML = entry.content.trim().replace(/\n/g, "<br>"); // 改行を反映
-                div.appendChild(p);
-
-                // セクションに追加
-                section.appendChild(h2);
-                section.appendChild(div);
-                diaryContainer.appendChild(section);
-            });
         }
+    ];
 
-        // 日付を人間向けにフォーマットする関数
-        function formatDate(dateString) {
-            const year = dateString.slice(0, 4);
-            const month = dateString.slice(4, 6);
-            const day = dateString.slice(6, 8);
-            return `${year}年${month}月${day}日`;
+    // 日記セクションを生成する関数
+    function generateDiarySections() {
+        const diaryContainer = document.getElementById("diary-container");
+
+        // 各日記をHTML要素として生成
+        diaryData.forEach((entry, index) => {
+            const section = document.createElement("section");
+
+            // 日記タイトル
+            const h2 = document.createElement("p");
+            const link = document.createElement("a");
+            link.href = "javascript:void(0);";
+            link.textContent = entry.title;
+            link.onclick = () => showDiary(index);
+            h2.appendChild(link);
+
+            // 日記内容（非表示にする）
+            const div = document.createElement("div");
+            div.id = `diary-${index}`;
+            div.className = "diary-content";
+            div.style.display = "none";
+
+            const p = document.createElement("p");
+            p.innerHTML = entry.content.trim().replace(/\n/g, "<br>"); // 改行を反映
+            div.appendChild(p);
+
+            // セクションに追加
+            section.appendChild(h2);
+            section.appendChild(div);
+            diaryContainer.appendChild(section);
+        });
+    }
+
+    // 日記を表示する関数
+    function showDiary(index) {
+        const allDiaryContents = document.querySelectorAll('.diary-content');
+        allDiaryContents.forEach(content => (content.style.display = 'none')); // 他を非表示
+
+        const diaryContent = document.getElementById(`diary-${index}`);
+        if (diaryContent) {
+            diaryContent.style.display = 'block';
         }
+    }
 
-        // 日記を表示する関数
-        function showDiary(date) {
-            const allDiaryContents = document.querySelectorAll('.diary-content');
-            allDiaryContents.forEach(content => (content.style.display = 'none')); // 他を非表示
-
-            const diaryContent = document.getElementById(`diary-${date}`);
-            if (diaryContent) {
-                diaryContent.style.display = 'block';
-            }
-        }
-
-        // ページ読み込み時に日記を生成
-        window.onload = generateDiarySections;
+    // ページ読み込み時に日記を生成
+    window.onload = generateDiarySections;
     </script>
+
 </body>
 </html>
