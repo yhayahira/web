@@ -49,17 +49,128 @@
     <!-- ポップアップ表示のコンテナ -->
     <div class="popup" id="popup">
         <button class="navigation-button prev-button" id="prevButton">▶</button>
-        <img src="" alt="表示画像" id="popupImage">
+        <img src="" alt="表示画像" id="popupImage" decoding="async" fetchpriority="high">
         <button class="navigation-button next-button" id="nextButton">◀</button>
         <button class="close-popup" id="closePopup">×</button>
     </div>
 
-<script>
-    const mangaTitles = document.querySelectorAll('.manga h3');
-    const popup = document.getElementById('popup');
-    const popupImage = document.getElementById('popupImage');
-    const nextButton = document.getElementById('nextButton');
-    const prevButton = document.getElementById('prevButton');
+    <script>
+        const mangaTitles = document.querySelectorAll('.manga h3');
+        const popup = document.getElementById('popup');
+        const popupImage = document.getElementById('popupImage');
+        const nextButton = document.getElementById('nextButton');
+        const prevButton = document.getElementById('prevButton');
+        const closePopup = document.getElementById('closePopup');
+        let currentImages = [];
+        let currentIndex = 0;
+
+        mangaTitles.forEach(title => {
+            title.addEventListener('click', () => {
+                const mangaId = title.parentElement.dataset.mangaId;
+
+                const images = {
+                    a: [
+                        'images/maboroshi_008.jpg','images/maboroshi_009.jpg','images/maboroshi_010.jpg','images/maboroshi_011.jpg','images/maboroshi_012.jpg','images/maboroshi_013.jpg','images/maboroshi_014.jpg','images/maboroshi_015.jpg','images/maboroshi_016.jpg','images/maboroshi_017.jpg','images/maboroshi_018.jpg','images/maboroshi_019.jpg','images/maboroshi_020.jpg','images/maboroshi_021.jpg','images/maboroshi_022.jpg','images/maboroshi_023.jpg','images/maboroshi_024.jpg','images/maboroshi_025.jpg','images/maboroshi_026.jpg','images/maboroshi_027.jpg','images/maboroshi_028.jpg','images/maboroshi_029.jpg'
+                    ],
+                    b: [
+                        'images/majutu1.jpg','images/majutu2.jpg','images/majutu3.jpg','images/majutu4.jpg','images/majutu5.jpg','images/majutu6.jpg','images/majutu7.jpg'
+                    ],
+                    c: [
+                        'images/jigoku_001.jpg','images/jigoku_002.jpg','images/jigoku_003.jpg','images/jigoku_004.jpg','images/jigoku_005.jpg','images/jigoku_006.jpg','images/jigoku_007.jpg','images/jigoku_008.jpg','images/jigoku_009.jpg','images/jigoku_010.jpg','images/jigoku_011.jpg','images/jigoku_012.jpg','images/jigoku_013.jpg','images/jigoku_014.jpg','images/jigoku_015.jpg'
+                    ],
+                    d: [
+                        'images/dog_image1.png','images/dog_image2.png'
+                    ]
+                };
+
+                currentImages = images[mangaId] || [];
+                if (currentImages.length > 0) {
+                    currentIndex = 0;
+                    // 1ページ目を即表示
+                    showPopup(currentImages[currentIndex]);
+
+                    // UIをブロックしないよう少し遅らせて残りを順次プリロード
+                    setTimeout(() => {
+                        preloadImages(currentImages.slice(1));
+                    }, 100);
+                } else {
+                    console.log('画像が見つかりませんでした');
+                }
+            });
+        });
+
+        function preloadImages(imageArray) {
+            // ブラウザアイドル時にプリロードを進める（未対応ブラウザはフォールバック）
+            const runner = () => {
+                imageArray.forEach(src => {
+                    const img = new Image();
+                    img.decoding = 'async';
+                    img.loading = 'eager';
+                    img.src = src;
+                });
+            };
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(runner, { timeout: 1500 });
+            } else {
+                runner();
+            }
+        }
+
+        function showPopup(src) {
+            popupImage.src = src;
+            popup.style.display = 'flex';
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            if (currentIndex === 0) {
+                prevButton.style.display = 'none';
+            } else {
+                prevButton.style.display = 'flex';
+            }
+            nextButton.style.display = 'flex';
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                popupImage.src = currentImages[currentIndex];
+                updateNavigationButtons();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < currentImages.length - 1) {
+                currentIndex++;
+                popupImage.src = currentImages[currentIndex];
+            } else {
+                popup.style.display = 'none';
+            }
+            updateNavigationButtons();
+        });
+
+        closePopup.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        let startX = 0;
+        let endX = 0;
+
+        popup.addEventListener('touchstart', (event) => {
+            startX = event.touches[0].clientX;
+        });
+
+        popup.addEventListener('touchend', (event) => {
+            endX = event.changedTouches[0].clientX;
+            if (endX - startX > 50) {
+                nextButton.click(); // 右スワイプ
+            } else if (startX - endX > 50) {
+                prevButton.click(); // 左スワイプ
+            }
+        });
+    </script>
+</body>
+</html>
     const closePopup = document.getElementById('closePopup');
     let currentImages = [];
     let currentIndex = 0;
@@ -69,10 +180,18 @@
             const mangaId = title.parentElement.dataset.mangaId;
 
             const images = {
-                a: [ "images/maboroshi_008.jpg", "images/maboroshi_009.jpg", "images/maboroshi_010.jpg", /* ... */ ],
-                b: [ "images/majutu1.jpg", "images/majutu2.jpg", /* ... */ ],
-                c: [ "images/jigoku_001.jpg", "images/jigoku_002.jpg", /* ... */ ],
-                d: [ "images/dog_image1.png", "images/dog_image2.png" ]
+   a: [
+'images/maboroshi_008.jpg','images/maboroshi_009.jpg','images/maboroshi_010.jpg','images/maboroshi_011.jpg','images/maboroshi_012.jpg','images/maboroshi_013.jpg','images/maboroshi_014.jpg','images/maboroshi_015.jpg','images/maboroshi_016.jpg','images/maboroshi_017.jpg','images/maboroshi_018.jpg','images/maboroshi_019.jpg','images/maboroshi_020.jpg','images/maboroshi_021.jpg','images/maboroshi_022.jpg','images/maboroshi_023.jpg','images/maboroshi_024.jpg','images/maboroshi_025.jpg','images/maboroshi_026.jpg','images/maboroshi_027.jpg','images/maboroshi_028.jpg','images/maboroshi_029.jpg'
+],
+b: [
+'images/majutu1.jpg','images/majutu2.jpg','images/majutu3.jpg','images/majutu4.jpg','images/majutu5.jpg','images/majutu6.jpg','images/majutu7.jpg'
+],
+c: [
+'images/jigoku_001.jpg','images/jigoku_002.jpg','images/jigoku_003.jpg','images/jigoku_004.jpg','images/jigoku_005.jpg','images/jigoku_006.jpg','images/jigoku_007.jpg','images/jigoku_008.jpg','images/jigoku_009.jpg','images/jigoku_010.jpg','images/jigoku_011.jpg','images/jigoku_012.jpg','images/jigoku_013.jpg','images/jigoku_014.jpg','images/jigoku_015.jpg'
+],
+d: [
+'images/dog_image1.png','images/dog_image2.png'
+]
             };
 
             currentImages = images[mangaId] || [];
@@ -149,4 +268,5 @@
 </script>
 </body>
 </html>
+
 
